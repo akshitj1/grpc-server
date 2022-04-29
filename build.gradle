@@ -1,0 +1,46 @@
+buildscript {
+    ext {
+        springVersion = '2.3.12.RELEASE'
+        springPluginVersion = '1.0.11.RELEASE'
+        grpcSpringVersion = '2.13.1.RELEASE'
+        internalInterfaceVersion = '1.0.0'
+    }
+}
+
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springPluginVersion}")
+    }
+}
+
+plugins {
+    id 'java'
+    id 'io.spring.dependency-management' version "${springPluginVersion}"
+    id 'org.springframework.boot' version "${springVersion}"
+}
+
+group 'org.akshit'
+version '1.0-SNAPSHOT'
+
+java{
+    toolchain{
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation platform("org.springframework.boot:spring-boot-dependencies:${springVersion}")
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "net.devh:grpc-server-spring-boot-starter:${grpcSpringVersion}"
+    implementation "org.akshit:grpc-interface:${internalInterfaceVersion}"
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+
