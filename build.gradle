@@ -30,7 +30,16 @@ java{
 
 repositories {
     mavenCentral()
+    // to fetch grpc-interface library published locally.
     mavenLocal()
+    // to fetch remote grpc-interface library. not needed if published locally
+    maven {
+        url 'https://akshit-825194067279.d.codeartifact.ap-south-1.amazonaws.com/maven/grpc-interface/'
+        credentials {
+            username "aws"
+            password System.env.CODEARTIFACT_AUTH_TOKEN
+        }
+    }
 }
 
 dependencies {
@@ -42,5 +51,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 }
+
 
 
