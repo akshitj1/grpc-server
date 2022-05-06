@@ -25,6 +25,26 @@ docker run \
 docker tag grpc-client:latest akshitj1/grpc-client:latest
 docker push akshitj1/grpc-client:latest
 
+
+export AWS_PROFILE=kops
+
+export NAME=gocrazy.dealshare.co.in
+export KOPS_STATE_STORE=s3://kubernetes-dealshare-com-state-storage
+
+
+
+kubectl apply -f kubernetes.yaml
+
+kubectl get pods
+POD_NAME=grpc-server-deployment-5b4bf54b75-bxnfm
+kubectl exec -ti $POD_NAME -- bash
+
+kubectl get services
+kubectl get deployments
+
+kubectl get pod grpc-client-deployment-7454b7b4b-p8f6t --output=yaml
+kubectl logs grpc-client-deployment-7454b7b4b-6qzhj
+
 # to force rebuild
 kubectl delete pod  grpc-client-deployment-7454b7b4b-p8f6t
 
